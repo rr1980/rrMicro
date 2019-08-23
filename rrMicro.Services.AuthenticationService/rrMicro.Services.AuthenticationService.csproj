@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\rrMicro.Common.Models\rrMicro.Common.Models.csproj" />
+    <ProjectReference Include="..\rrMicro.Common.Token\rrMicro.Common.Token.csproj" />
+    <ProjectReference Include="..\rrMicro.Database.Repositories\rrMicro.Database.Repositories.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,21 @@
+{
+  "routes": [
+    {
+      "endpoint": "/Test",
+      "destination": {
+        "path": "http://localhost:7000/api/Test/",
+        "requiresAuthentication": "true"
+      }
+    },
+    {
+      "endpoint": "/Auth",
+      "destination": {
+        "path": "http://localhost:6000/api/Auth/",
+        "requiresAuthentication": "false"
+      }
+    }
+  ],
+  "authenticationService": {
+    "path": "http://localhost:6000/api/Auth/Validate"
+  }
+}
