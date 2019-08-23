@@ -23,9 +23,9 @@ namespace rrMicro.Gateway.Main
             Routes = JsonLoader.Deserialize<List<Route>>(Convert.ToString(router.routes));
         }
 
-        public async Task<HttpResponseMessage> RouteRequest(HttpRequest request)
+        public async Task RouteRequest(HttpContext context)
         {
-            string path = request.Path.ToString();
+            string path = context.Request.Path.ToString();
             string basePath = '/' + path.Split('/')[1];
 
             Destination destination;
@@ -35,18 +35,22 @@ namespace rrMicro.Gateway.Main
             }
             catch
             {
-                return ConstructErrorMessage("The path could not be found.");
+                var data = await (ConstructErrorMessage("The path could not be found.")).Content.ReadAsStringAsync();
+                await context.Response.WriteAsync(data);
+                return;
             }
 
             if (destination.RequiresAuthentication)
             {
-                if (!AuthResolver.Validate(request))
+                if (!AuthResolver.Validate(context.Request))
                 {
-                    return ConstructErrorMessage("Authentication failed.");
+                    var data = await (ConstructErrorMessage("Authentication failed.")).Content.ReadAsStringAsync();
+                    await context.Response.WriteAsync(data);
+                    return;
                 }
             }
 
-            return await destination.SendRequest(request);
+            await destination.SendRequest(context);
         }
 
         private HttpResponseMessage ConstructErrorMessage(string error)

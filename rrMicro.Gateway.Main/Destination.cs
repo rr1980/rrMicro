@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,26 +30,86 @@ namespace rrMicro.Gateway.Main
             RequiresAuthentication = false;
         }
 
-        public async Task<HttpResponseMessage> SendRequest(HttpRequest request)
+        public async Task SendRequest(HttpContext context)
         {
-            string requestContent;
-            using (Stream receiveStream = request.Body)
-            {
-                using (StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8))
-                {
-                    requestContent = await readStream.ReadToEndAsync();
-                }
-            }
+            var newRequest = CreateTargetMessage(context, CreateDestinationUri(context.Request));
 
-            using (var newRequest = new HttpRequestMessage(new HttpMethod(request.Method), CreateDestinationUri(request)))
+            using (var responseMessage = await client.SendAsync(newRequest, HttpCompletionOption.ResponseHeadersRead, context.RequestAborted))
             {
-                newRequest.Content = new StringContent(requestContent, Encoding.UTF8, request.ContentType);
-                var response = await client.SendAsync(newRequest);
-                return response;
+                context.Response.StatusCode = (int)responseMessage.StatusCode;
+
+                CopyFromTargetResponseHeaders(context, responseMessage);
+
+                await ProcessResponseContent(context, responseMessage);
             }
         }
 
-        private string CreateDestinationUri(HttpRequest request)
+        private async Task ProcessResponseContent(HttpContext context, HttpResponseMessage responseMessage)
+        {
+            var content = await responseMessage.Content.ReadAsByteArrayAsync();
+            await context.Response.Body.WriteAsync(content);
+        }
+
+        private HttpRequestMessage CreateTargetMessage(HttpContext context, Uri targetUri)
+        {
+            var requestMessage = new HttpRequestMessage();
+            CopyFromOriginalRequestContentAndHeaders(context, requestMessage);
+
+            targetUri = new Uri(targetUri.OriginalString);
+
+            requestMessage.RequestUri = targetUri;
+            requestMessage.Headers.Host = targetUri.Host;
+            requestMessage.Method = GetMethod(context.Request.Method);
+
+            return requestMessage;
+        }
+
+        private static HttpMethod GetMethod(string method)
+        {
+            if (HttpMethods.IsDelete(method)) return HttpMethod.Delete;
+            if (HttpMethods.IsGet(method)) return HttpMethod.Get;
+            if (HttpMethods.IsHead(method)) return HttpMethod.Head;
+            if (HttpMethods.IsOptions(method)) return HttpMethod.Options;
+            if (HttpMethods.IsPost(method)) return HttpMethod.Post;
+            if (HttpMethods.IsPut(method)) return HttpMethod.Put;
+            if (HttpMethods.IsTrace(method)) return HttpMethod.Trace;
+            return new HttpMethod(method);
+        }
+
+        private void CopyFromOriginalRequestContentAndHeaders(HttpContext context, HttpRequestMessage requestMessage)
+        {
+            var requestMethod = context.Request.Method;
+
+            if (!HttpMethods.IsGet(requestMethod) &&
+                !HttpMethods.IsHead(requestMethod) &&
+                !HttpMethods.IsDelete(requestMethod) &&
+                !HttpMethods.IsTrace(requestMethod))
+            {
+                var streamContent = new StreamContent(context.Request.Body);
+                requestMessage.Content = streamContent;
+            }
+
+            foreach (var header in context.Request.Headers)
+            {
+                requestMessage.Content?.Headers.TryAddWithoutValidation(header.Key, header.Value.ToArray());
+            }
+        }
+
+        private void CopyFromTargetResponseHeaders(HttpContext context, HttpResponseMessage responseMessage)
+        {
+            foreach (var header in responseMessage.Headers)
+            {
+                context.Response.Headers[header.Key] = header.Value.ToArray();
+            }
+
+            foreach (var header in responseMessage.Content.Headers)
+            {
+                context.Response.Headers[header.Key] = header.Value.ToArray();
+            }
+            context.Response.Headers.Remove("transfer-encoding");
+        }
+
+        private Uri CreateDestinationUri(HttpRequest request)
         {
             string requestPath = request.Path.ToString();
             string queryString = request.QueryString.ToString();
@@ -59,7 +121,7 @@ namespace rrMicro.Gateway.Main
                 endpoint = endpointSplit[1];
 
 
-            return Path + endpoint + queryString;
+            return new Uri(Path + endpoint + queryString);
         }
     }
 }

@@ -41,19 +41,16 @@ namespace rrMicro.Gateway.Main
             {
                 string path = context.Request.Path.ToString();
                 string basePath = '/' + path.Split('/')[1];
-                string data;
 
                 if (basePath == "/Login")
                 {
-                    data = await AuthResolver.Login(context.Request);
+                    var data = await AuthResolver.Login(context.Request);
+                    await context.Response.WriteAsync(data);
                 }
                 else
                 {
-                    var content = await router.RouteRequest(context.Request);
-                    data = await content.Content.ReadAsStringAsync();
+                    await router.RouteRequest(context);
                 }
-
-                await context.Response.WriteAsync(data);
             });
         }
     }
