@@ -36,13 +36,23 @@ namespace rrMicro.Gateway.Main
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseMiddleware<ReverseProxyMiddleware>();
-
             Router router = new Router("routes.json");
             app.Run(async (context) =>
             {
-                var content = await router.RouteRequest(context.Request);
-                var data = await content.Content.ReadAsStringAsync();
+                string path = context.Request.Path.ToString();
+                string basePath = '/' + path.Split('/')[1];
+                string data;
+
+                if (basePath == "/Login")
+                {
+                    data = await AuthResolver.Login(context.Request);
+                }
+                else
+                {
+                    var content = await router.RouteRequest(context.Request);
+                    data = await content.Content.ReadAsStringAsync();
+                }
+
                 await context.Response.WriteAsync(data);
             });
         }

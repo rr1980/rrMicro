@@ -3,27 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rrMicro.Gateway.Main", "rrMicro.Gateway.Main\rrMicro.Gateway.Main.csproj", "{17CF923F-E1F9-4A01-9D2C-8574B06B7698}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rrMicro.Gateway.Main", "rrMicro.Gateway.Main\rrMicro.Gateway.Main.csproj", "{17CF923F-E1F9-4A01-9D2C-8574B06B7698}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{849B7B6C-237F-4250-BA22-E419137ADE73}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{309EC2F4-7F96-471D-BFD5-1D4760CC5AB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rrMicro.Services.AuthenticationService", "rrMicro.Services.AuthenticationService\rrMicro.Services.AuthenticationService.csproj", "{5641FBBC-2D52-4660-86A4-04897110A996}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rrMicro.Services.AuthenticationService", "rrMicro.Services.AuthenticationService\rrMicro.Services.AuthenticationService.csproj", "{5641FBBC-2D52-4660-86A4-04897110A996}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{034CB19B-2866-442A-B69A-AE192C6BF988}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rrMicro.Common.Models", "rrMicro.Common.Models\rrMicro.Common.Models.csproj", "{9C5666CE-50D1-4DA0-A8D5-B740975DAE55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rrMicro.Common.Models", "rrMicro.Common.Models\rrMicro.Common.Models.csproj", "{9C5666CE-50D1-4DA0-A8D5-B740975DAE55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rrMicro.Common.Enums", "rrMicro.Common.Enums\rrMicro.Common.Enums.csproj", "{BEAD3C75-3E25-43BD-A2DF-47BA8B10F14A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rrMicro.Common.Enums", "rrMicro.Common.Enums\rrMicro.Common.Enums.csproj", "{BEAD3C75-3E25-43BD-A2DF-47BA8B10F14A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{8FB53162-54ED-4FC8-923A-FB35BE32AA43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rrMicro.Database.Repositories", "rrMicro.Database.Repositories\rrMicro.Database.Repositories.csproj", "{A8177120-9331-442B-9D12-8C7BB7746218}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rrMicro.Database.Repositories", "rrMicro.Database.Repositories\rrMicro.Database.Repositories.csproj", "{A8177120-9331-442B-9D12-8C7BB7746218}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rrMicro.Services.TestService", "rrMicro.Services.TestService\rrMicro.Services.TestService.csproj", "{1EB4D196-5573-4066-B5B2-6EC6764AC9A9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rrMicro.Common.Token", "rrMicro.Common.Token\rrMicro.Common.Token.csproj", "{44A4CE54-21C9-4A0B-B733-41DEBEA5CEC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rrMicro.Services.TestService", "rrMicro.Services.TestService\rrMicro.Services.TestService.csproj", "{1EB4D196-5573-4066-B5B2-6EC6764AC9A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,10 +53,6 @@ Global
 		{1EB4D196-5573-4066-B5B2-6EC6764AC9A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EB4D196-5573-4066-B5B2-6EC6764AC9A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EB4D196-5573-4066-B5B2-6EC6764AC9A9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{44A4CE54-21C9-4A0B-B733-41DEBEA5CEC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{44A4CE54-21C9-4A0B-B733-41DEBEA5CEC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{44A4CE54-21C9-4A0B-B733-41DEBEA5CEC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{44A4CE54-21C9-4A0B-B733-41DEBEA5CEC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,7 +64,6 @@ Global
 		{BEAD3C75-3E25-43BD-A2DF-47BA8B10F14A} = {034CB19B-2866-442A-B69A-AE192C6BF988}
 		{A8177120-9331-442B-9D12-8C7BB7746218} = {8FB53162-54ED-4FC8-923A-FB35BE32AA43}
 		{1EB4D196-5573-4066-B5B2-6EC6764AC9A9} = {309EC2F4-7F96-471D-BFD5-1D4760CC5AB3}
-		{44A4CE54-21C9-4A0B-B733-41DEBEA5CEC8} = {034CB19B-2866-442A-B69A-AE192C6BF988}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A4CF3BC8-6877-4544-9762-248C73C82653}

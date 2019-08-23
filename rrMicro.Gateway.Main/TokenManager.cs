@@ -3,7 +3,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace rrMicro.Common.Token
+namespace rrMicro.Gateway.Main
 {
     public static class TokenManager
     {
