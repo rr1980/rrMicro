@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace rrMicro.Gateway.Main
 {
@@ -48,16 +49,25 @@ namespace rrMicro.Gateway.Main
             app.Run(async (context) =>
             {
                 string path = context.Request.Path.ToString();
-                string basePath = '/' + path.Split('/')[1];
 
-                if (basePath == "/Login")
+                if (path == "/Intern/Register")
                 {
-                    var data = await AuthResolver.Login(context.Request);
+                    var data = JsonConvert.SerializeObject(new { ok = "ABC" });
                     await context.Response.WriteAsync(data);
                 }
                 else
                 {
-                    await router.RouteRequest(context);
+                    string basePath = '/' + path.Split('/')[1];
+
+                    if (basePath == "/Login")
+                    {
+                        var data = await AuthResolver.Login(context.Request);
+                        await context.Response.WriteAsync(data);
+                    }
+                    else
+                    {
+                        await router.RouteRequest(context);
+                    }
                 }
             });
         }
