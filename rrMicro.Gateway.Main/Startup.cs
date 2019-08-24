@@ -26,6 +26,7 @@ namespace rrMicro.Gateway.Main
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +36,13 @@ namespace rrMicro.Gateway.Main
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+            });
 
             Router router = new Router("routes.json");
             app.Run(async (context) =>

@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rrMicro.Database.Repositori
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rrMicro.Services.TestService", "rrMicro.Services.TestService\rrMicro.Services.TestService.csproj", "{1EB4D196-5573-4066-B5B2-6EC6764AC9A9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{CF52DE77-44D0-4022-91DC-609434C0CD03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rrMicro.Frontend.Admin.Web", "rrMicro.Frontend.Admin.Web\rrMicro.Frontend.Admin.Web.csproj", "{A44AFFE2-F7C7-4FAE-A7D1-646AE31EE90F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,10 @@ Global
 		{1EB4D196-5573-4066-B5B2-6EC6764AC9A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EB4D196-5573-4066-B5B2-6EC6764AC9A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EB4D196-5573-4066-B5B2-6EC6764AC9A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A44AFFE2-F7C7-4FAE-A7D1-646AE31EE90F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A44AFFE2-F7C7-4FAE-A7D1-646AE31EE90F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A44AFFE2-F7C7-4FAE-A7D1-646AE31EE90F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A44AFFE2-F7C7-4FAE-A7D1-646AE31EE90F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +65,7 @@ Global
 		{BEAD3C75-3E25-43BD-A2DF-47BA8B10F14A} = {034CB19B-2866-442A-B69A-AE192C6BF988}
 		{A8177120-9331-442B-9D12-8C7BB7746218} = {8FB53162-54ED-4FC8-923A-FB35BE32AA43}
 		{1EB4D196-5573-4066-B5B2-6EC6764AC9A9} = {309EC2F4-7F96-471D-BFD5-1D4760CC5AB3}
+		{A44AFFE2-F7C7-4FAE-A7D1-646AE31EE90F} = {CF52DE77-44D0-4022-91DC-609434C0CD03}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A4CF3BC8-6877-4544-9762-248C73C82653}
